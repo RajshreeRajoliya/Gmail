@@ -20,19 +20,55 @@ const Header = styled(Box)`
         font-weight: 500;
     }
 `
+const RecipientWrapper = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    & > div {
+        font-size: 14px;
+        border-bottom: 1px solid #F5F5F5;
+        margin-top: 10px;
+    }
+`
+const Footer = styled(Box)`
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    align-items: center;
+`;
 
-const ComposeMail = () => {
+const SendButton = styled(Button)`
+    background: #0B57D0;
+    color: #fff;
+    font-weight: 500;
+    text-transform: none;
+    border-radius: 18px;
+    width: 100px;
+`
+const ComposeMail = ({openDrawer}) => {
   return (
     <Dialog
-     open={true}
+     open={openDrawer}
      PaperProps={{ sx: dialogStyle }}
     >
 <Header><Typography>New Message</Typography>
 <Close fontSize="small" />
 </Header>
-<Box></Box>
-<Box></Box>
-<Box></Box>
+<RecipientWrapper>
+<InputBase placeholder='Recipients' name="to" />
+<InputBase placeholder='Subject' name="subject"/>
+</RecipientWrapper>
+<TextField 
+                multiline
+                rows={20}
+                sx={{ '& .MuiOutlinedInput-notchedOutline': { border: 'none' } }}
+                name="body"
+                
+            />
+<Footer>
+                <SendButton>Send</SendButton>
+                <DeleteOutline/>
+            </Footer>
     </Dialog>
   )
 }
